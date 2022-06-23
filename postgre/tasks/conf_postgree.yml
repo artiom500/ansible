@@ -1,0 +1,19 @@
+---
+ - name: Create config directory
+   file:
+       path: /etc/postgresql/{{ ver}}/main
+       state: directory
+
+ - name: Creates directory postgresql data
+   file:
+     path: "{{ path }}/{{ ver }}/main"
+     owner: "postgres"
+     group: "postgres"
+     state: directory
+     mode: 0700
+ 
+ - name: Sets conf file postgresql
+   copy:
+     src: "files/postgresql.conf.j2"
+     dest: "/etc/postgresql/{{ ver }}/main/postgresql.conf"
+   notify: restart postgres

@@ -1,0 +1,15 @@
+---
+  - hosts: app
+    remote_user: admin
+    become: yes
+    become_method: sudo
+    roles:
+     - docker
+
+  - hosts: database
+    remote_user: admin
+    gather_facts: Yes
+    become: yes
+    become_method: sudo
+    roles:
+        - postgre

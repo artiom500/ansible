@@ -1,0 +1,14 @@
+---
+# tasks file for docker
+
+ - include_tasks: Redhat-docker.yml
+   when: ansible_os_family == 'RedHat'
+
+ - include_tasks: Debian-docker.yml
+   when: ansible_os_family == 'Debian'
+
+ - name: Docker service
+   service:
+          name: docker
+          state: started
+          enabled: yes
